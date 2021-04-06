@@ -1,0 +1,6 @@
+Question 7: 
+SELECT rev.name, b.title
+FROM rating r1 JOIN rating r2 ON r1.bID = r2.bID AND r1.rID = r2.rID
+JOIN Reviewer rev on r1.rID = rev.rID
+JOIN Book b on r1.bID =b.bID
+WHERE r1.ratingDate < r2.ratingDate AND r1.ratings < r2.ratings;
