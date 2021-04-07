@@ -1,4 +1,61 @@
-Question 7: 
+Question 1:
+
+SELECT title, genre
+FROM Book,
+WHERE author = 'Harper Lee'
+
+To Kill a Mocking Bird, Classic
+
+Question 2:
+ 
+SELECT ratings, ratingDate 
+FROM Rating 
+WHERE ratings > 3 
+ORDER BY ratingDate ASC;
+
+2011
+
+Question 3:
+
+SELECT re.name, b.title
+   ...> FROM reviewer re JOIN Rating ra
+   ...> ON re.rID = ra.rID
+   ...> JOIN book b
+   ...> ON ra.bID = b.bID
+   ...> WHERE b.title = 'To Kill a Mocking Bird';
+
+Sarah Martinez
+Mike Anderson
+
+Question 4:
+
+Select re.name, ra.ratingDate
+   ...> FROM reviewer re JOIN Rating ra
+   ...> on re.rID = ra.rID
+   ...> WHERE ra.ratingDate Is NULL;
+
+Daniel Lewis
+Chris Jackson
+
+Question 5:
+
+SELECT rev.name, b.title, ra.ratings
+   ...> FROM reviewer rev JOIN Rating ra
+   ...> ON rev.rID = ra.rID
+   ...> JOIN book b
+   ...> ON ra.bID = b.bID
+   ...> WHERE b.author = rev.name;
+
+name          title       ratings
+------------  ----------  ----------
+Isaac Asimov  I Robot     5
+
+Question 6:
+
+
+
+Question 7:
+ 
 SELECT rev.name, b.title
 FROM rating r1 JOIN rating r2 ON r1.bID = r2.bID AND r1.rID = r2.rID
 JOIN Reviewer rev on r1.rID = rev.rID
