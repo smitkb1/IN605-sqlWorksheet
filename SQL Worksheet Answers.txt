@@ -17,9 +17,9 @@ ORDER BY ratingDate ASC;
 
 Question 3:
 
-SELECT re.name, b.title
-   ...> FROM reviewer re JOIN Rating ra
-   ...> ON re.rID = ra.rID
+SELECT rev.name, b.title
+   ...> FROM reviewer rev JOIN Rating ra
+   ...> ON rev.rID = ra.rID
    ...> JOIN book b
    ...> ON ra.bID = b.bID
    ...> WHERE b.title = 'To Kill a Mocking Bird';
@@ -29,9 +29,9 @@ Mike Anderson
 
 Question 4:
 
-Select re.name, ra.ratingDate
-   ...> FROM reviewer re JOIN Rating ra
-   ...> on re.rID = ra.rID
+Select rev.name, ra.ratingDate
+   ...> FROM reviewer rev JOIN Rating ra
+   ...> on rev.rID = ra.rID
    ...> WHERE ra.ratingDate Is NULL;
 
 Daniel Lewis
@@ -52,7 +52,22 @@ Isaac Asimov  I Robot     5
 
 Question 6:
 
+ SELECT rev.name, b.title, ra.ratings, ra.ratingDate
+   ...> FROM rating ra
+   ...> JOIN reviewer rev
+   ...> ON ra.rID = rev.rID
+   ...> JOIN book b
+   ...> ON ra.bID = b.bID
+   ...> ORDER BY rev.name, b.title, ra.ratings;
 
+name                            title                      ratings     ratingDate
+------------------------------  -------------------------  ----------  ----------
+Ashley White                    The Diary of a Young Girl  3           2011-01-02
+Brittany Harris                 Dune                       2           2011-01-20
+Brittany Harris                 I Robot                    2           2011-01-30
+Brittany Harris                 I Robot                    4           2011-01-12
+Chris Jackson                   Dune                       3           2011-01-27
+...
 
 Question 7:
  
@@ -61,3 +76,46 @@ FROM rating r1 JOIN rating r2 ON r1.bID = r2.bID AND r1.rID = r2.rID
 JOIN Reviewer rev on r1.rID = rev.rID
 JOIN Book b on r1.bID =b.bID
 WHERE r1.ratingDate < r2.ratingDate AND r1.ratings < r2.ratings;
+
+name                            title
+------------------------------  ----------------------
+Sarah Martinez                  To Kill a Mocking Bird
+
+Question 8:
+
+SELECT b.title, MAX(ra.ratings) AS max_rating
+   ...> FROM rating ra
+   ...> JOIN book b
+   ...> ON b.bID = ra.bID
+   ...> GROUP BY b.title;
+
+title                           max_rating
+------------------------------  ----------
+1776                            3
+Dune                            3
+I Robot                         5
+The Diary of a Young Girl       3
+The Neverending Story           5
+To Kill a Mocking Bird          4
+
+Question 9:
+
+SELECT b.title, (MAX(ra.ratings) - MIN(ra.ratings)) AS ratings_spread
+   ...> FROM rating ra
+   ...> JOIN book b ON ra.bID = b.bID
+   ...> GROUP BY b.title
+   ...> ORDER BY ratings_spread DESC;
+
+title                           ratings_spread
+------------------------------  --------------
+I Robot                         3
+To Kill a Mocking Bird          2
+The Neverending Story           1
+The Diary of a Young Girl       1
+Dune                            1
+1776                            0
+
+Question 10:
+
+
+
